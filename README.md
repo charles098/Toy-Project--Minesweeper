@@ -1,8 +1,8 @@
 # 지뢰찾기 토이프로젝트
 
-<img src = "./imges/중급.png" width="300" height="400">     
+<img src = "./images/중급.png" width="300" height="400">     
 
-<a href="https://charles098.github.io/Toy-Project--Minesweeper/easy.html" target="_blank">        
+<a href="https://charles098.github.io/Toy-Project--Minesweeper/easy.html" target="_blank">게임하러 가보기!</a>        
 
 ## 1. 기능
 1) 좌클릭(웃는 얼굴)   
