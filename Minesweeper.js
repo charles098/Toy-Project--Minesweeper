@@ -1,5 +1,6 @@
 const cells = document.querySelectorAll('td');
 const box = document.querySelector('table');
+const img = document.querySelector('img');
 
 let rowNum = 9; // 박스 행 수
 let colNum = 9; // 박스 열 수
@@ -10,11 +11,11 @@ let clickColor = '#EDF3F5';
 let BgColor = '#C3C4CD';
 
 
-
 // 6x6 빈 행렬, 방문 배열 생성
 const table = Array.from(Array(rowNum), () => Array(colNum).fill(0));
 const visit = Array.from(Array(rowNum), () => Array(colNum).fill(0)); // 0: non-visit, 1: visit, 2: flag
 const fix = Array.from(Array(rowNum), () => Array(colNum).fill(0));
+
 
 // 1. 지뢰 설치 및 데이터 반영
 setMine();
@@ -35,6 +36,10 @@ box.addEventListener('mouseover', mouseOverHandler);
 //    ㄴ 지뢰 아님: table != -1 && visit == 0
 document.addEventListener('mouseup', mouseUpHandler);
 box.addEventListener('mouseout', mouseOutHandler);
+
+// 얼굴사진 클릭시 초기화
+img.addEventListener('click', init);
+
 
 // 4. 우클릭 이벤트 추가
 // 깃발 없으면 놓고, 있으면 없앤다. 빈칸이 아니면 무반응
@@ -112,20 +117,14 @@ function mouseUpHandler(e){
                 // 깃발 있으면 없앰
                 visit[row][col] = 0;
                 e.target.style.backgroundImage = "url('')";
-                
-    
                 updateAround(row, col, '+');
-                
             }
             else if(visit[row][col] == 0){
                 // 깃발 없으면 삽입
                 visit[row][col] = 2;
                 pushVal(row, col, -2);
                 e.target.style.backgroundColor = BgColor;
-
-                
                 updateAround(row, col,'-');
-                
             }
         }
         if(e.button == 0){
@@ -154,6 +153,7 @@ function mouseUpHandler(e){
             }
         }
     }
+    checkwin();
 }
 
 
@@ -168,7 +168,7 @@ function gameOver(row, col){
             if(visit[i][j] == 2 && fix[i][j] != -1) cells[rowNum * i + j].style.backgroundColor = '#F6D6CF';
         }
     }
-
+    img.src = "./images/lose.png";
     setTimeout(() => alert('Game over'), 50);
 }
 
@@ -195,7 +195,7 @@ function findAll(row, col){
                 q.push([i,j]);
                 zero.push([i,j]);
                 visit[i][j] = 1;
-                pushVal(i, j, 0);
+                pushVal(i, j, fix[i][j]);
             }
         }
     }
@@ -235,6 +235,40 @@ function setMine(){
             cells[rowNum * i + j].dataCol = j;
         }
     }
+}
+
+
+// visit == 0이 하나도 없으면 이긴것
+function checkwin(){
+    let check = true;
+    for(let i = 0; i < rowNum; i++){
+        for(let j = 0; j < colNum; j++){
+            if(visit[i][j] == 0) check = false;
+        }
+    }
+
+    if(check){
+        img.src = "./images/win.png";
+        setTimeout(() => alert('Congratulation!'), 50);
+        visit[0][0] = 0;
+    }
+}
+
+
+// 사진 클릭시 초기화
+function init(e){
+    img.src = "./images/smile.png";
+    for(let i = 0; i < rowNum; i++){
+        for(let j = 0; j < colNum; j++){
+            table[i][j] = 0;
+            visit[i][j] = 0;
+            fix[i][j] = 0;
+            cells[rowNum * i + j].style.backgroundImage = "url('')";
+            cells[rowNum * i + j].style.backgroundColor = BgColor;
+        }
+    }
+    box.style.pointerEvents = 'auto';
+    setMine();
 }
 
 
