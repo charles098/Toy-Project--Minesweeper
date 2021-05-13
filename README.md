@@ -1,6 +1,6 @@
 # 지뢰찾기 토이프로젝트
 
-![](./images/중급.png)   
+![](./images/중급.png){: height="400px" width="400px"}
 
 [게임 하러 가보기!](https://charles098.github.io/Toy-Project--Minesweeper/easy.html){:target="_blank"}      
 
