@@ -158,14 +158,14 @@ function mouseUpHandler(e){
 
 
 function gameOver(row, col){
-    cells[rowNum * row + col].style.backgroundColor = '#E38985';
+    cells[colNum * row + col].style.backgroundColor = '#E38985';
     box.style.pointerEvents = 'none';
     for(let i = 0; i < rowNum; i++){
         for(let j = 0; j < colNum; j++){
             if(fix[i][j] == -1 && visit[i][j] != 2) pushVal(i, j, -1);
 
             // 지뢰가 아닌데 깃발 표시한거면 잘못. 표시해준다
-            if(visit[i][j] == 2 && fix[i][j] != -1) cells[rowNum * i + j].style.backgroundColor = '#F6D6CF';
+            if(visit[i][j] == 2 && fix[i][j] != -1) cells[colNum * i + j].style.backgroundColor = '#F6D6CF';
         }
     }
     img.src = "./images/lose.png";
@@ -218,8 +218,8 @@ function setMine(){
     let row, col, idx;
     for(let i = 0; i < mineNum; i++){ 
         idx = tmp.splice(Math.floor(Math.random() * tmp.length),1)[0]
-        row = parseInt(idx / rowNum);
-        col = idx % rowNum;
+        row = parseInt(idx / colNum);
+        col = idx % colNum;
         table[row][col] = -1;
         fix[row][col] = -1;
     }
@@ -231,8 +231,8 @@ function setMine(){
                 table[i][j] = myNum(i,j);
                 fix[i][j] = myNum(i,j);
             }
-            cells[rowNum * i + j].dataRow = i;
-            cells[rowNum * i + j].dataCol = j;
+            cells[colNum * i + j].dataRow = i;
+            cells[colNum * i + j].dataCol = j;
         }
     }
 }
@@ -263,8 +263,8 @@ function init(e){
             table[i][j] = 0;
             visit[i][j] = 0;
             fix[i][j] = 0;
-            cells[rowNum * i + j].style.backgroundImage = "url('')";
-            cells[rowNum * i + j].style.backgroundColor = BgColor;
+            cells[colNum * i + j].style.backgroundImage = "url('')";
+            cells[colNum * i + j].style.backgroundColor = BgColor;
         }
     }
     box.style.pointerEvents = 'auto';
@@ -292,7 +292,7 @@ function paintAround(i, j, paint){
                 pushVal(i,j+1,fix[i][j+1]);
             }
         }
-        else cells[rowNum * i + (j+1)].style.backgroundColor = color; //동 : [row][col+1]
+        else cells[colNum * i + (j+1)].style.backgroundColor = color; //동 : [row][col+1]
     }
     if(isRange(i-1, j+1) && visit[i-1][j+1] == 0){
         if(paint == 'bfs'){
@@ -306,7 +306,7 @@ function paintAround(i, j, paint){
             pushVal(i-1,j+1,fix[i-1][j+1]);
             }
         }
-        else cells[rowNum * (i-1) + (j+1)].style.backgroundColor = color; // 동북 : [row-1][col+1]
+        else cells[colNum * (i-1) + (j+1)].style.backgroundColor = color; // 동북 : [row-1][col+1]
     }
     if(isRange(i-1, j) && visit[i-1][j] == 0){
         if(paint == 'bfs'){
@@ -320,7 +320,7 @@ function paintAround(i, j, paint){
                 pushVal(i-1,j,fix[i-1][j]);
             }
         }
-        else cells[rowNum * (i-1) + (j)].style.backgroundColor = color; // 북 : [row-1][col]
+        else cells[colNum * (i-1) + (j)].style.backgroundColor = color; // 북 : [row-1][col]
     }
     if(isRange(i-1, j-1) && visit[i-1][j-1] == 0){
         if(paint == 'bfs'){
@@ -334,7 +334,7 @@ function paintAround(i, j, paint){
                 pushVal(i-1,j-1,fix[i-1][j-1]);
             }
         }
-        else cells[rowNum * (i-1) + (j-1)].style.backgroundColor = color; // 북서 : [row-1][col-1]
+        else cells[colNum * (i-1) + (j-1)].style.backgroundColor = color; // 북서 : [row-1][col-1]
     }
     if(isRange(i, j-1) && visit[i][j-1] == 0){
         if(paint == 'bfs'){
@@ -348,7 +348,7 @@ function paintAround(i, j, paint){
                 pushVal(i,j-1,fix[i][j-1]);
             }
         }
-        else cells[rowNum * i + (j-1)].style.backgroundColor = color; // 서 : [row][col-1]
+        else cells[colNum * i + (j-1)].style.backgroundColor = color; // 서 : [row][col-1]
     }
     if(isRange(i+1, j-1) && visit[i+1][j-1] == 0){
         if(paint == 'bfs'){
@@ -362,7 +362,7 @@ function paintAround(i, j, paint){
                 pushVal(i+1,j-1,fix[i+1][j-1]);
             }
         }
-        else cells[rowNum * (i+1) + (j-1)].style.backgroundColor = color; // 남서 : [row+1][col-1]
+        else cells[colNum * (i+1) + (j-1)].style.backgroundColor = color; // 남서 : [row+1][col-1]
     }
     if(isRange(i+1, j) && visit[i+1][j] == 0){
         if(paint == 'bfs'){
@@ -376,7 +376,7 @@ function paintAround(i, j, paint){
                 pushVal(i+1,j,fix[i+1][j]);
             }
         }
-        else cells[rowNum * (i+1) + (j)].style.backgroundColor = color; // 남 : [row+1][col]
+        else cells[colNum * (i+1) + (j)].style.backgroundColor = color; // 남 : [row+1][col]
     }
     if(isRange(i+1, j+1) && visit[i+1][j+1] == 0){
         if(paint == 'bfs'){
@@ -390,7 +390,7 @@ function paintAround(i, j, paint){
                 pushVal(i+1,j+1,fix[i+1][j+1]);
             }
         }
-        else cells[rowNum * (i+1) + (j+1)].style.backgroundColor = color; // 동남 : [row+1][col+1]
+        else cells[colNum * (i+1) + (j+1)].style.backgroundColor = color; // 동남 : [row+1][col+1]
     }
 
     if(end) gameOver(r,c);
@@ -457,7 +457,7 @@ function isRange(row, col){
 }
 
 function pushVal(row, col, number){
-    let elem = cells[rowNum * row + col];
+    let elem = cells[colNum * row + col];
 
     switch(number){
         case -2: // 깃발 - 사진
