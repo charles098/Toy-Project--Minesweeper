@@ -1,52 +1,53 @@
-*{
+* {
     box-sizing: border-box;
 }
 
 
-body{
+body {
     background-color: #FAF8F0;
 }
 
-.lisence{
+.lisence {
     margin-top: 2%;
     font-size: 24px;
     text-align: center;
 }
 
-.levelBox{
+.levelBox {
     text-align: center;
     margin-top: 2%;
-    margin-bottom: 3%
+    margin-bottom: 3%;
 }
 
-a{
+a {
     margin-left: 40px;
     margin-right: 40px;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
-a:hover{
+a:hover {
     color: #4F84F7;
-    cursor: default;
+    cursor: pointer;
 }
 
-.container{
+.container {
     border: 2px solid #616A73;
-    width: 704px;
-    height: 474px;
+    width: 304px;
+    height: 374px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.menu{
-    width: 700px;
+.menu {
+    width: 300px;
     height: 70px;
     background-color: #EDF0F0;
     padding-top: 10px;
 }
 
-.state{
+.state {
     border: 2px solid #616A73;
     margin-right: auto;
     margin-left: auto;
@@ -58,22 +59,22 @@ a:hover{
 
 }
 
-img{
+img {
     height: 35px;
     width: 35px;
 }
 
-table{
+table {
     background-color: #616A73;
     border-top: 2px solid #616A73;
-    width: 700px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
 }
 
-td{
+td {
     background-color: #C3C4CD;
     background-size: 100% 100%;
     background-position: center;
