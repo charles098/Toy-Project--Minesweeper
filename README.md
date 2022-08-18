@@ -2,7 +2,7 @@
 
 <img src = "./images/중급.png" width="340" height="400">     
 
-<a href="https://charles098.github.io/Toy-Project--Minesweeper/easy.html" target="_blank">게임하러 가보기!</a>        
+<a href="https://charles098.github.io/Toy-Project--Minesweeper/mine-sweeper.html?level=easy" target="_blank">게임하러 가보기!</a>        
 
 ## 1. 기능
 1) 좌클릭(웃는 얼굴)   
